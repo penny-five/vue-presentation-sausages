@@ -23,6 +23,7 @@ import ActionButton from './ActionButton.vue';
 
 const rng = max => Math.ceil(Math.random() * max);
 
+
 export default {
   components: {
     ActionButton
@@ -32,33 +33,27 @@ export default {
       numbers: []
     };
   },
-  computed: {
-    /* Re-evaluated when this.numbers changes */
-    hasNumbers() {
-      return this.numbers.length > 0;
-    },
-    /* Re-evaluated when this.numbers changes */
-    lastFiveNumbers() {
-      return this.numbers.slice(Math.max(this.numbers.length - 5, 0));
-    },
-    /* Re-evaluated when this.numbers changes */
-    min() {
-      return Math.min(...this.numbers);
-    },
-    /* Re-evaluated when this.numbers changes */
-    max() {
-      return Math.max(...this.numbers);
-    },
-    /* Re-evaluated only when this.min or this.max changes */
-    range() {
-      console.log('range changed');
-      return `${this.min} - ${this.max}`;
-    }
-  },
   methods: {
     generateNumber() {
       /* This is the only place where data is mutated */
       this.numbers.push(rng(500));
+    }
+  },
+  computed: {
+    hasNumbers() {
+      return this.numbers.length > 0;
+    },
+    lastFiveNumbers() {
+      return this.numbers.slice(Math.max(this.numbers.length - 5, 0));
+    },
+    min() {
+      return Math.min(...this.numbers);
+    },
+    max() {
+      return Math.max(...this.numbers);
+    },
+    range() {
+      return `${this.min} - ${this.max}`;
     }
   }
 };
