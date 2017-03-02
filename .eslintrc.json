@@ -8,10 +8,18 @@
   "settings": {
     "import/resolver": "webpack"
   },
+  "parserOptions": {
+    "ecmaFeatures": {
+      "experimentalObjectRestSpread": true,
+      "jsx": true
+    }
+  },
   "rules": {
     "comma-dangle": ["error", "never"],
     "func-names": "off",
     "space-before-function-paren": ["error", "never"],
-    "arrow-parens": ["error", "as-needed"]
+    "arrow-parens": ["error", "as-needed"],
+    "no-unused-vars": ["error", { "argsIgnorePattern": "^h$" }],
+    "react/jsx-uses-vars": [2]
   }
 }
