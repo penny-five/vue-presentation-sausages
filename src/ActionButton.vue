@@ -30,8 +30,10 @@ export default {
 
   font-size: $font-size-small;
 
-  border: 1px solid $color-brand-secondary;
-  background: none;
+  color: white;
+
+  border: none;
+  background: $color-brand-secondary;
 
   &:hover {
     border-color: $color-brand-primary;
