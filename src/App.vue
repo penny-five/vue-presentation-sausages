@@ -1,42 +1,24 @@
-<template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <action-button text="Generate a new number" @click="generateNumber"></action-button>
-    <template v-if="hasNumbers">
-      <h2>Last 5 generated numbers</h2>
-      <ul>
-        <li v-for="number in lastFiveNumbers">{{ number }}</li>
-      </ul>
-      <h2>Smallest</h2>
-      <p>{{ min || '-' }}</p>
-      <h2>Largest</h2>
-      <p>{{ max || '-' }}</p>
-      <h2>Range</h2>
-      <p>{{ range || '-' }}</p>
-    </template>
-  </div>
-</template>
-
 <script>
 import ActionButton from './ActionButton.vue';
+import Logo from './assets/logo.png';
 
 
 const rng = max => Math.ceil(Math.random() * max);
 
 
 export default {
-  components: {
-    ActionButton
-  },
   data() {
     return {
+      showStats: true,
       numbers: []
     };
   },
   methods: {
     generateNumber() {
-      /* This is the only place where data is mutated */
       this.numbers.push(rng(500));
+    },
+    toggleStatsVisibility() {
+      this.showStats = !this.showStats;
     }
   },
   computed: {
@@ -55,6 +37,30 @@ export default {
     range() {
       return `${this.min} - ${this.max}`;
     }
+  },
+  render(h) {
+    console.log('Render() called @', new Date().getTime());
+    return (
+      <div id="app">
+        <img src={Logo} />
+        <ActionButton text="Generate a new number" onClick={this.generateNumber}/>
+        <ActionButton text="Show/hide stats" onClick={this.toggleStatsVisibility}/>
+        {this.showStats && this.hasNumbers && (
+          <div>
+            <h2>Last 5 generated numbers</h2>
+            <ul>
+              { this.lastFiveNumbers.map(number => <li>{ number }</li>) }
+            </ul>
+            <h2>Smallest</h2>
+            <p>{ this.min || '-' }</p>
+            <h2>Largest</h2>
+            <p>{ this.max || '-' }</p>
+            <h2>Range</h2>
+            <p>{ this.range || '-' }</p>
+          </div>
+        )}
+      </div>
+    );
   }
 };
 
