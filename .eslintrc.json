@@ -1,0 +1,17 @@
+{
+  "root": true,
+  "extends": "airbnb-base",
+  "plugins": [
+    "import",
+    "vue"
+  ],
+  "settings": {
+    "import/resolver": "webpack"
+  },
+  "rules": {
+    "comma-dangle": ["error", "never"],
+    "func-names": "off",
+    "space-before-function-paren": ["error", "never"],
+    "arrow-parens": ["error", "as-needed"]
+  }
+}
